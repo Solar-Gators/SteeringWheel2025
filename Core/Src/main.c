@@ -58,7 +58,12 @@ static void MX_UART5_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+uint16_t button_press_init;
 
+uint32_t previousTimes[] = {0,0,0,0,0,0,0,0};
+uint32_t currentTime = 0;
+
+uint8_t buttonPressEvents;
 /* USER CODE END 0 */
 
 /**
@@ -248,12 +253,15 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOB, BUTTON6_LED_Pin|BUTTON5_LED_Pin|BUTTON1_LED_Pin|BUTTON2_LED_Pin
                           |OK_LED_Pin|ERROR_LED_Pin, GPIO_PIN_RESET);
 
+<<<<<<< HEAD
   /*Configure GPIO pins : BUTTON8_Pin BUTTON7_Pin */
   GPIO_InitStruct.Pin = BUTTON8_Pin|BUTTON7_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+=======
+>>>>>>> origin
   /*Configure GPIO pin : BUTTON8_LED_Pin */
   GPIO_InitStruct.Pin = BUTTON8_LED_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -261,6 +269,15 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(BUTTON8_LED_GPIO_Port, &GPIO_InitStruct);
 
+<<<<<<< HEAD
+=======
+  /*Configure GPIO pin : BUTTON7_Pin */
+  GPIO_InitStruct.Pin = BUTTON7_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(BUTTON7_GPIO_Port, &GPIO_InitStruct);
+
+>>>>>>> origin
   /*Configure GPIO pins : BUTTON7_LED_Pin BUTTON3_LED_Pin BUTTON4_LED_Pin */
   GPIO_InitStruct.Pin = BUTTON7_LED_Pin|BUTTON3_LED_Pin|BUTTON4_LED_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -270,7 +287,11 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pins : BUTTON6_Pin BUTTON3_Pin */
   GPIO_InitStruct.Pin = BUTTON6_Pin|BUTTON3_Pin;
+<<<<<<< HEAD
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+=======
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+>>>>>>> origin
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
@@ -285,7 +306,11 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pins : BUTTON5_Pin BUTTON1_Pin BUTTON2_Pin */
   GPIO_InitStruct.Pin = BUTTON5_Pin|BUTTON1_Pin|BUTTON2_Pin;
+<<<<<<< HEAD
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+=======
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+>>>>>>> origin
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
@@ -304,8 +329,24 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin)
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
+	UNUSED(GPIO_Pin);
+
+	currentTime = HAL_GetTick();
+
+
+	//button 1
+	if(GPIO_Pin == BUTTON1_Pin && (currentTime - previousTimes[0]) > 10){
+		buttonPressEvents |= (0x1 << 0);
+		previousTimes[0] = currentTime;
+	}
+
+	if(GPIO_Pin == BUTTON2_Pin && (currentTime - previousTimes[1]) > 10){
+		buttonPressEvents |= (0x1 << 1);
+		previousTimes[1] = currentTime;
+	}
+
 
 
 }
