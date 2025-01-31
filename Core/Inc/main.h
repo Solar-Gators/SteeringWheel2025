@@ -58,8 +58,11 @@ void Error_Handler(void);
 
 /* Private defines -----------------------------------------------------------*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BUTTON8_Pin GPIO_PIN_5
 #define BUTTON8_GPIO_Port GPIOA
+=======
+>>>>>>> origin
 =======
 >>>>>>> origin
 #define BUTTON8_LED_Pin GPIO_PIN_6
@@ -67,6 +70,10 @@ void Error_Handler(void);
 #define BUTTON7_Pin GPIO_PIN_7
 #define BUTTON7_GPIO_Port GPIOA
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BUTTON7_EXTI_IRQn EXTI9_5_IRQn
+>>>>>>> origin
 =======
 #define BUTTON7_EXTI_IRQn EXTI9_5_IRQn
 >>>>>>> origin
@@ -75,6 +82,10 @@ void Error_Handler(void);
 #define BUTTON6_Pin GPIO_PIN_5
 #define BUTTON6_GPIO_Port GPIOC
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BUTTON6_EXTI_IRQn EXTI9_5_IRQn
+>>>>>>> origin
 =======
 #define BUTTON6_EXTI_IRQn EXTI9_5_IRQn
 >>>>>>> origin
@@ -95,6 +106,10 @@ void Error_Handler(void);
 #define BUTTON3_Pin GPIO_PIN_6
 #define BUTTON3_GPIO_Port GPIOC
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BUTTON3_EXTI_IRQn EXTI9_5_IRQn
+>>>>>>> origin
 =======
 #define BUTTON3_EXTI_IRQn EXTI9_5_IRQn
 >>>>>>> origin

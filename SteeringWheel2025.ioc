@@ -15,6 +15,7 @@ Mcu.IPNb=5
 Mcu.Name=STM32L496R(E-G)Tx
 Mcu.Package=LQFP64
 <<<<<<< HEAD
+<<<<<<< HEAD
 Mcu.Pin0=PA5
 Mcu.Pin1=PA6
 Mcu.Pin10=PB14
@@ -42,6 +43,8 @@ Mcu.Pin8=PB12
 Mcu.Pin9=PB13
 Mcu.PinsNb=25
 =======
+=======
+>>>>>>> origin
 Mcu.Pin0=PA6
 Mcu.Pin1=PA7
 Mcu.Pin10=PB15
@@ -67,6 +70,9 @@ Mcu.Pin7=PB12
 Mcu.Pin8=PB13
 Mcu.Pin9=PB14
 Mcu.PinsNb=24
+<<<<<<< HEAD
+>>>>>>> origin
+=======
 >>>>>>> origin
 Mcu.ThirdPartyNb=0
 Mcu.UserConstants=
@@ -90,10 +96,13 @@ PA13\ (JTMS/SWDIO).Signal=SYS_JTMS-SWDIO
 PA14\ (JTCK/SWCLK).Mode=Serial_Wire
 PA14\ (JTCK/SWCLK).Signal=SYS_JTCK-SWCLK
 <<<<<<< HEAD
+<<<<<<< HEAD
 PA5.GPIOParameters=GPIO_Label
 PA5.GPIO_Label=BUTTON8
 PA5.Locked=true
 PA5.Signal=GPIO_Input
+=======
+>>>>>>> origin
 =======
 >>>>>>> origin
 PA6.GPIOParameters=GPIO_Label
@@ -104,7 +113,11 @@ PA7.GPIOParameters=GPIO_Label
 PA7.GPIO_Label=BUTTON7
 PA7.Locked=true
 <<<<<<< HEAD
+<<<<<<< HEAD
 PA7.Signal=GPIO_Input
+=======
+PA7.Signal=GPXTI7
+>>>>>>> origin
 =======
 PA7.Signal=GPXTI7
 >>>>>>> origin
@@ -116,17 +129,23 @@ PB1.GPIOParameters=GPIO_Label
 PB1.GPIO_Label=BUTTON5
 PB1.Locked=true
 <<<<<<< HEAD
+<<<<<<< HEAD
 PB1.Signal=GPIO_Input
 PB12.GPIOParameters=GPIO_Label
 PB12.GPIO_Label=BUTTON1
 PB12.Locked=true
 PB12.Signal=GPIO_Input
 =======
+=======
+>>>>>>> origin
 PB1.Signal=GPXTI1
 PB12.GPIOParameters=GPIO_Label
 PB12.GPIO_Label=BUTTON1
 PB12.Locked=true
 PB12.Signal=GPXTI12
+<<<<<<< HEAD
+>>>>>>> origin
+=======
 >>>>>>> origin
 PB13.GPIOParameters=GPIO_Label
 PB13.GPIO_Label=BUTTON1_LED
@@ -136,7 +155,11 @@ PB14.GPIOParameters=GPIO_Label
 PB14.GPIO_Label=BUTTON2
 PB14.Locked=true
 <<<<<<< HEAD
+<<<<<<< HEAD
 PB14.Signal=GPIO_Input
+=======
+PB14.Signal=GPXTI14
+>>>>>>> origin
 =======
 PB14.Signal=GPXTI14
 >>>>>>> origin
@@ -173,17 +196,23 @@ PC5.GPIOParameters=GPIO_Label
 PC5.GPIO_Label=BUTTON6
 PC5.Locked=true
 <<<<<<< HEAD
+<<<<<<< HEAD
 PC5.Signal=GPIO_Input
 PC6.GPIOParameters=GPIO_Label
 PC6.GPIO_Label=BUTTON3
 PC6.Locked=true
 PC6.Signal=GPIO_Input
 =======
+=======
+>>>>>>> origin
 PC5.Signal=GPXTI5
 PC6.GPIOParameters=GPIO_Label
 PC6.GPIO_Label=BUTTON3
 PC6.Locked=true
 PC6.Signal=GPXTI6
+<<<<<<< HEAD
+>>>>>>> origin
+=======
 >>>>>>> origin
 PC7.GPIOParameters=GPIO_Label
 PC7.GPIO_Label=BUTTON3_LED

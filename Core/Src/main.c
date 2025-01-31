@@ -254,12 +254,15 @@ static void MX_GPIO_Init(void)
                           |OK_LED_Pin|ERROR_LED_Pin, GPIO_PIN_RESET);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   /*Configure GPIO pins : BUTTON8_Pin BUTTON7_Pin */
   GPIO_InitStruct.Pin = BUTTON8_Pin|BUTTON7_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+=======
+>>>>>>> origin
 =======
 >>>>>>> origin
   /*Configure GPIO pin : BUTTON8_LED_Pin */
@@ -270,13 +273,19 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(BUTTON8_LED_GPIO_Port, &GPIO_InitStruct);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> origin
   /*Configure GPIO pin : BUTTON7_Pin */
   GPIO_InitStruct.Pin = BUTTON7_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(BUTTON7_GPIO_Port, &GPIO_InitStruct);
 
+<<<<<<< HEAD
+>>>>>>> origin
+=======
 >>>>>>> origin
   /*Configure GPIO pins : BUTTON7_LED_Pin BUTTON3_LED_Pin BUTTON4_LED_Pin */
   GPIO_InitStruct.Pin = BUTTON7_LED_Pin|BUTTON3_LED_Pin|BUTTON4_LED_Pin;
@@ -288,7 +297,11 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pins : BUTTON6_Pin BUTTON3_Pin */
   GPIO_InitStruct.Pin = BUTTON6_Pin|BUTTON3_Pin;
 <<<<<<< HEAD
+<<<<<<< HEAD
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+=======
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+>>>>>>> origin
 =======
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
 >>>>>>> origin
@@ -307,7 +320,11 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pins : BUTTON5_Pin BUTTON1_Pin BUTTON2_Pin */
   GPIO_InitStruct.Pin = BUTTON5_Pin|BUTTON1_Pin|BUTTON2_Pin;
 <<<<<<< HEAD
+<<<<<<< HEAD
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+=======
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+>>>>>>> origin
 =======
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
 >>>>>>> origin
