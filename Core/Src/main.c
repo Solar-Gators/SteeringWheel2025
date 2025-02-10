@@ -40,6 +40,8 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+TIM_HandleTypeDef htim16;
+
 UART_HandleTypeDef huart4;
 UART_HandleTypeDef huart5;
 
@@ -52,6 +54,7 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_UART4_Init(void);
 static void MX_UART5_Init(void);
+static void MX_TIM16_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -97,6 +100,7 @@ int main(void)
   MX_GPIO_Init();
   MX_UART4_Init();
   MX_UART5_Init();
+  MX_TIM16_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -154,6 +158,38 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief TIM16 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM16_Init(void)
+{
+
+  /* USER CODE BEGIN TIM16_Init 0 */
+
+  /* USER CODE END TIM16_Init 0 */
+
+  /* USER CODE BEGIN TIM16_Init 1 */
+
+  /* USER CODE END TIM16_Init 1 */
+  htim16.Instance = TIM16;
+  htim16.Init.Prescaler = 0;
+  htim16.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim16.Init.Period = 65535;
+  htim16.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim16.Init.RepetitionCounter = 0;
+  htim16.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim16) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM16_Init 2 */
+
+  /* USER CODE END TIM16_Init 2 */
+
 }
 
 /**
@@ -317,18 +353,44 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 
 	//button 1
-	if(GPIO_Pin == BUTTON1_Pin && (currentTime - previousTimes[0]) > 10){
-		buttonPressEvents |= (0x1 << 0);
-		previousTimes[0] = currentTime;
+		if(GPIO_Pin == BUTTON1_Pin && (currentTime - previousTimes[0]) > 10){
+			buttonPressEvents |= (0x1 << 0);
+			previousTimes[0] = currentTime;
+		}
+
+		if(GPIO_Pin == BUTTON2_Pin){ /* Rising and falling edge trigger */
+			buttonPressCode = buttonPressEvents ^ (0x1 << 1); /* XOR of bit position with current buttonPressEvents state acts as a toggle */
+			HAL_TIM_Base_Start_TI(&htim2); /*Timer Starts */
+		}
+
+		if(GPIO_Pin == BUTTON3_Pin){ /* Rising and falling edge trigger */
+			buttonPressCode = buttonPressEvents ^ (0x1 << 2); /* XOR of bit position with current buttonPressEvents state acts as a toggle */
+			HAL_TIM_Base_Start_TI(&htim2); /*Timer Starts */
+		}
+
+		if(GPIO_Pin == BUTTON4_Pin){ /* Rising and falling edge trigger */
+			buttonPressCode = buttonPressEvents ^ (0x1 << 3); /* XOR of bit position with current buttonPressEvents state acts as a toggle */
+			HAL_TIM_Base_Start_TI(&htim2); /*Timer Starts */
+		}
+
+		if(GPIO_Pin == BUTTON5_Pin){ /* Rising and falling edge trigger */
+			buttonPressCode = buttonPressEvents ^ (0x1 << 4); /* XOR of bit position with current buttonPressEvents state acts as a toggle */
+			HAL_TIM_Base_Start_TI(&htim2); /*Timer Starts */
+		}
+
+		if(GPIO_Pin == BUTTON6_Pin){ /* Rising and falling edge trigger */
+			buttonPressCode = buttonPressEvents ^ (0x1 << 5); /* XOR of bit position with current buttonPressEvents state acts as a toggle */
+			HAL_TIM_Base_Start_TI(&htim2); /*Timer Starts */
+		}
+
+
+
+}
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+	//Check if period overflow was triggered by timer 16
+	if(htim == &htim16){
+		//If timer is triggered, turn on all interrupts again and use the flag system to identify which Button was pressed
 	}
-
-	if(GPIO_Pin == BUTTON2_Pin && (currentTime - previousTimes[1]) > 10){
-		buttonPressEvents |= (0x1 << 1);
-		previousTimes[1] = currentTime;
-	}
-
-
-
 }
 /* USER CODE END 4 */
 
