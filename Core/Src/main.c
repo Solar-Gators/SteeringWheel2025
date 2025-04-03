@@ -377,7 +377,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		}
 	}
 
-	if (GPIO_Pin == BUTTON3_Pin) {
+	if (GPIO_Pin == BUTTON3_Pin) { // hazards
 		currentTime = HAL_GetTick();
 
 		if ((currentTime - lastButtonPressTime[2]) > DEBOUNCE_THRESHOLD) {
@@ -385,12 +385,13 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 			if (HAL_GPIO_ReadPin(BUTTON3_GPIO_Port, BUTTON3_Pin) == GPIO_PIN_RESET) {
 				buttonStates ^= 0b00000100;
-
+        buttonStates &= 0b11110111; // turn off left turn
+        buttonStates &= 0b01111111; // turn off right turn
 			}
 		}
 	}
 
-	if (GPIO_Pin == BUTTON4_Pin) {
+	if (GPIO_Pin == BUTTON4_Pin) { // left turn
 		currentTime = HAL_GetTick();
 
 		if ((currentTime - lastButtonPressTime[3]) > DEBOUNCE_THRESHOLD) {
@@ -398,7 +399,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 			if (HAL_GPIO_ReadPin(BUTTON4_GPIO_Port, BUTTON4_Pin) == GPIO_PIN_RESET) {
 				buttonStates ^= 0b00001000;
-				buttonStates &= 0b01111111;
+				buttonStates &= 0b01111111; // turn off right turn
+        buttonStates &= 0b11111011; // turn off hazards
 
 			}
 		}
@@ -432,7 +434,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		}
 	}
 
-	if (GPIO_Pin == BUTTON8_Pin) {
+	if (GPIO_Pin == BUTTON8_Pin) { // right turn
 		currentTime = HAL_GetTick();
 
 		if ((currentTime - lastButtonPressTime[7]) > DEBOUNCE_THRESHOLD) {
@@ -440,7 +442,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 			if (HAL_GPIO_ReadPin(BUTTON8_GPIO_Port, BUTTON8_Pin) == GPIO_PIN_RESET) {
 				buttonStates ^= 0b10000000;
-				buttonStates &= 0b11110111;
+				buttonStates &= 0b11110111; // turn of left turn
+        buttonStates &= 0b11111011; // turn off hazards
 			}
 		}
 	}

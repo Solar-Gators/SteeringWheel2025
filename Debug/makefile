@@ -84,8 +84,8 @@ all: main-build
 main-build: SteeringWheel2025.elf secondary-outputs
 
 # Tool invocations
-SteeringWheel2025.elf SteeringWheel2025.map: $(OBJS) $(USER_OBJS) C:\Users\samrb\STM32CubeIDE\workspace_1.16.0\SteeringWheel2025\STM32L496RGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-g++ -o "SteeringWheel2025.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\samrb\STM32CubeIDE\workspace_1.16.0\SteeringWheel2025\STM32L496RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SteeringWheel2025.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+SteeringWheel2025.elf SteeringWheel2025.map: $(OBJS) $(USER_OBJS) C:\msys64\home\funny\solar-gators\SteeringWheel2025\STM32L496RGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-g++ -o "SteeringWheel2025.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\msys64\home\funny\solar-gators\SteeringWheel2025\STM32L496RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SteeringWheel2025.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
