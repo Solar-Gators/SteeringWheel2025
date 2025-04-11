@@ -337,6 +337,9 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(BUTTON4_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI1_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI1_IRQn);
+
   HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
@@ -385,8 +388,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 			if (HAL_GPIO_ReadPin(BUTTON3_GPIO_Port, BUTTON3_Pin) == GPIO_PIN_RESET) {
 				buttonStates ^= 0b00000100;
-        buttonStates &= 0b11110111; // turn off left turn
-        buttonStates &= 0b01111111; // turn off right turn
+        //buttonStates &= 0b11110111; // turn off left turn
+        //buttonStates &= 0b01111111; // turn off right turn
 			}
 		}
 	}
@@ -399,8 +402,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 			if (HAL_GPIO_ReadPin(BUTTON4_GPIO_Port, BUTTON4_Pin) == GPIO_PIN_RESET) {
 				buttonStates ^= 0b00001000;
-				buttonStates &= 0b01111111; // turn off right turn
-        buttonStates &= 0b11111011; // turn off hazards
+				//buttonStates &= 0b01111111; // turn off right turn
+        //buttonStates &= 0b11111011; // turn off hazards
 
 			}
 		}
@@ -442,8 +445,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 			if (HAL_GPIO_ReadPin(BUTTON8_GPIO_Port, BUTTON8_Pin) == GPIO_PIN_RESET) {
 				buttonStates ^= 0b10000000;
-				buttonStates &= 0b11110111; // turn of left turn
-        buttonStates &= 0b11111011; // turn off hazards
+				//buttonStates &= 0b11110111; // turn of left turn
+        //buttonStates &= 0b11111011; // turn off hazards
 			}
 		}
 	}

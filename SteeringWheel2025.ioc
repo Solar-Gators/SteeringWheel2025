@@ -224,4 +224,4 @@ UART4.IPParameters=BaudRate
 VP_SYS_VS_Systick.Mode=SysTick
 VP_SYS_VS_Systick.Signal=SYS_VS_Systick
 board=custom
-isbadioc=true
+isbadioc=false
