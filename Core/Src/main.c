@@ -343,19 +343,24 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
 	uint32_t currentTime;
 
-	if (GPIO_Pin == BUTTON1_Pin) {
+	if (GPIO_Pin == BUTTON1_Pin) { /// fan
 		currentTime = HAL_GetTick();
 
 	    if ((currentTime - lastButtonPressTime[0]) > DEBOUNCE_THRESHOLD) {
 	    	lastButtonPressTime[0] = currentTime;  // Update last press time
 
 	        if (HAL_GPIO_ReadPin(BUTTON1_GPIO_Port, BUTTON1_Pin) == GPIO_PIN_RESET) {
-	                buttonStates ^= 0b00000001;
-
+	          buttonStates ^= 0b00000001;
 	        }
+
+          if (buttonStates & 0b00000001) 
+        	  HAL_GPIO_WritePin(BUTTON1_LED_GPIO_Port, BUTTON1_LED_Pin, GPIO_PIN_SET);
+          else 
+        	  HAL_GPIO_WritePin(BUTTON1_LED_GPIO_Port, BUTTON1_LED_Pin, GPIO_PIN_RESET);
+          
 	    }
 	}
-	if (GPIO_Pin == BUTTON2_Pin) {
+	if (GPIO_Pin == BUTTON2_Pin) { // display
 		currentTime = HAL_GetTick();
 
 		if ((currentTime - lastButtonPressTime[1]) > DEBOUNCE_THRESHOLD) {
@@ -363,8 +368,12 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 		    if (HAL_GPIO_ReadPin(BUTTON2_GPIO_Port, BUTTON2_Pin) == GPIO_PIN_RESET) {
 		    	buttonStates ^= 0b00000010;
-
 		    }
+
+          if (buttonStates & 0b00000010) 
+        	  HAL_GPIO_WritePin(BUTTON2_LED_GPIO_Port, BUTTON2_LED_Pin, GPIO_PIN_SET);
+          else 
+        	  HAL_GPIO_WritePin(BUTTON2_LED_GPIO_Port, BUTTON2_LED_Pin, GPIO_PIN_RESET);
 		}
 	}
 
@@ -379,6 +388,15 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
         buttonStates &= 0b11110111; // turn off left turn
         buttonStates &= 0b01111111; // turn off right turn
 			}
+
+          if (buttonStates & 0b00000100) {
+        	  HAL_GPIO_WritePin(BUTTON3_LED_GPIO_Port, BUTTON3_LED_Pin, GPIO_PIN_SET);
+            // turn off left and right turn lights
+            HAL_GPIO_WritePin(BUTTON4_LED_GPIO_Port, BUTTON4_LED_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(BUTTON8_LED_GPIO_Port, BUTTON8_LED_Pin, GPIO_PIN_RESET);
+          }
+          else 
+        	  HAL_GPIO_WritePin(BUTTON3_LED_GPIO_Port, BUTTON3_LED_Pin, GPIO_PIN_RESET);
 		}
 	}
 
@@ -392,12 +410,21 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 				buttonStates ^= 0b00001000;
 				buttonStates &= 0b01111111; // turn off right turn
         buttonStates &= 0b11111011; // turn off hazards
-
 			}
+
+          if (buttonStates & 0b00001000) {
+        	  HAL_GPIO_WritePin(BUTTON4_LED_GPIO_Port, BUTTON4_LED_Pin, GPIO_PIN_SET);
+            // turn off right turn light
+            HAL_GPIO_WritePin(BUTTON8_LED_GPIO_Port, BUTTON8_LED_Pin, GPIO_PIN_RESET);
+            // turn off hazards
+            HAL_GPIO_WritePin(BUTTON3_LED_GPIO_Port, BUTTON3_LED_Pin, GPIO_PIN_RESET);
+          }
+          else 
+        	  HAL_GPIO_WritePin(BUTTON4_LED_GPIO_Port, BUTTON4_LED_Pin, GPIO_PIN_RESET);
 		}
 	}
 
-	if (GPIO_Pin == BUTTON5_Pin) {
+	if (GPIO_Pin == BUTTON5_Pin) { // ptt
 		currentTime = HAL_GetTick();
 
 		if ((currentTime - lastButtonPressTime[4]) > DEBOUNCE_THRESHOLD) {
@@ -405,14 +432,17 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 			if (HAL_GPIO_ReadPin(BUTTON5_GPIO_Port, BUTTON5_Pin) == GPIO_PIN_RESET) {
 				buttonStates ^= 0b00010000;
-
 			}
+          if (buttonStates & 0b00010000) 
+        	  HAL_GPIO_WritePin(BUTTON5_LED_GPIO_Port, BUTTON5_LED_Pin, GPIO_PIN_SET);
+          else 
+        	  HAL_GPIO_WritePin(BUTTON5_LED_GPIO_Port, BUTTON5_LED_Pin, GPIO_PIN_RESET);
 		}
 	}
 
 
 
-	if (GPIO_Pin == BUTTON7_Pin) {
+	if (GPIO_Pin == BUTTON7_Pin) { // headlights
 		currentTime = HAL_GetTick();
 
 		if ((currentTime - lastButtonPressTime[6]) > DEBOUNCE_THRESHOLD) {
@@ -422,6 +452,10 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 				buttonStates ^= 0b01000000;
 
 			}
+          if (buttonStates & 0b01000000) 
+        	  HAL_GPIO_WritePin(BUTTON7_LED_GPIO_Port, BUTTON7_LED_Pin, GPIO_PIN_SET);
+          else 
+        	  HAL_GPIO_WritePin(BUTTON7_LED_GPIO_Port, BUTTON7_LED_Pin, GPIO_PIN_RESET);
 		}
 	}
 
@@ -436,6 +470,15 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 				buttonStates &= 0b11110111; // turn of left turn
         buttonStates &= 0b11111011; // turn off hazards
 			}
+          if (buttonStates & 0b10000000) {
+        	  HAL_GPIO_WritePin(BUTTON8_LED_GPIO_Port, BUTTON8_LED_Pin, GPIO_PIN_SET);
+            // turn off left turn light
+            HAL_GPIO_WritePin(BUTTON4_LED_GPIO_Port, BUTTON4_LED_Pin, GPIO_PIN_RESET);
+            // turn off hazards
+            HAL_GPIO_WritePin(BUTTON3_LED_GPIO_Port, BUTTON3_LED_Pin, GPIO_PIN_RESET);
+          }
+          else 
+        	  HAL_GPIO_WritePin(BUTTON8_LED_GPIO_Port, BUTTON8_LED_Pin, GPIO_PIN_RESET);
 		}
 	}
 
