@@ -279,7 +279,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pins : BUTTON8_Pin BUTTON7_Pin */
   GPIO_InitStruct.Pin = BUTTON8_Pin|BUTTON7_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
@@ -312,29 +312,17 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : BUTTON5_Pin BUTTON2_Pin */
-  GPIO_InitStruct.Pin = BUTTON5_Pin|BUTTON2_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  /*Configure GPIO pins : BUTTON5_Pin BUTTON1_Pin BUTTON2_Pin */
+  GPIO_InitStruct.Pin = BUTTON5_Pin|BUTTON1_Pin|BUTTON2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : BUTTON1_Pin */
-  GPIO_InitStruct.Pin = BUTTON1_Pin;
+  /*Configure GPIO pins : BUTTON3_Pin BUTTON4_Pin */
+  GPIO_InitStruct.Pin = BUTTON3_Pin|BUTTON4_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(BUTTON1_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : BUTTON3_Pin */
-  GPIO_InitStruct.Pin = BUTTON3_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(BUTTON3_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : BUTTON4_Pin */
-  GPIO_InitStruct.Pin = BUTTON4_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(BUTTON4_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI1_IRQn, 0, 0);
@@ -388,8 +376,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 			if (HAL_GPIO_ReadPin(BUTTON3_GPIO_Port, BUTTON3_Pin) == GPIO_PIN_RESET) {
 				buttonStates ^= 0b00000100;
-        //buttonStates &= 0b11110111; // turn off left turn
-        //buttonStates &= 0b01111111; // turn off right turn
+        buttonStates &= 0b11110111; // turn off left turn
+        buttonStates &= 0b01111111; // turn off right turn
 			}
 		}
 	}
@@ -402,8 +390,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 			if (HAL_GPIO_ReadPin(BUTTON4_GPIO_Port, BUTTON4_Pin) == GPIO_PIN_RESET) {
 				buttonStates ^= 0b00001000;
-				//buttonStates &= 0b01111111; // turn off right turn
-        //buttonStates &= 0b11111011; // turn off hazards
+				buttonStates &= 0b01111111; // turn off right turn
+        buttonStates &= 0b11111011; // turn off hazards
 
 			}
 		}
@@ -445,8 +433,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 			if (HAL_GPIO_ReadPin(BUTTON8_GPIO_Port, BUTTON8_Pin) == GPIO_PIN_RESET) {
 				buttonStates ^= 0b10000000;
-				//buttonStates &= 0b11110111; // turn of left turn
-        //buttonStates &= 0b11111011; // turn off hazards
+				buttonStates &= 0b11110111; // turn of left turn
+        buttonStates &= 0b11111011; // turn off hazards
 			}
 		}
 	}
