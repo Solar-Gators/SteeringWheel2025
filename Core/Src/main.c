@@ -118,9 +118,20 @@ int main(void)
 
 	if(!HAL_GPIO_ReadPin(BUTTON6_GPIO_Port, BUTTON6_Pin)){
 		buttonStates |= 0b00100000;
+    HAL_GPIO_WritePin(BUTTON6_LED_GPIO_Port, BUTTON6_LED_Pin, GPIO_PIN_SET);
 	}else{
 		buttonStates &= 0b11011111;
+    HAL_GPIO_WritePin(BUTTON6_LED_GPIO_Port, BUTTON6_LED_Pin, GPIO_PIN_RESET);
 	}
+
+  if (!HAL_GPIO_ReadPin(BUTTON5_GPIO_Port, BUTTON5_Pin)) { // make ptt / brake debug button a hold
+    buttonStates |= 0b00010000;
+    HAL_GPIO_WritePin(BUTTON5_LED_GPIO_Port, BUTTON5_LED_Pin, GPIO_PIN_SET);
+  } else {
+    buttonStates &= 0b11101111;
+    HAL_GPIO_WritePin(BUTTON5_LED_GPIO_Port, BUTTON5_LED_Pin, GPIO_PIN_RESET);
+  }
+
 
 	if(HAL_UART_Transmit(&huart4, &buttonStates, 1, 1000) != HAL_OK){
 		HAL_GPIO_WritePin(ERROR_LED_GPIO_Port, ERROR_LED_Pin, SET);
@@ -424,24 +435,6 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
         	  HAL_GPIO_WritePin(BUTTON4_LED_GPIO_Port, BUTTON4_LED_Pin, GPIO_PIN_RESET);
 		}
 	}
-
-	if (GPIO_Pin == BUTTON5_Pin) { // ptt
-		currentTime = HAL_GetTick();
-
-		if ((currentTime - lastButtonPressTime[4]) > DEBOUNCE_THRESHOLD) {
-			lastButtonPressTime[4] = currentTime;  // Update last press time
-
-			if (HAL_GPIO_ReadPin(BUTTON5_GPIO_Port, BUTTON5_Pin) == GPIO_PIN_RESET) {
-				buttonStates ^= 0b00010000;
-			}
-          if (buttonStates & 0b00010000) 
-        	  HAL_GPIO_WritePin(BUTTON5_LED_GPIO_Port, BUTTON5_LED_Pin, GPIO_PIN_SET);
-          else 
-        	  HAL_GPIO_WritePin(BUTTON5_LED_GPIO_Port, BUTTON5_LED_Pin, GPIO_PIN_RESET);
-		}
-	}
-
-
 
 	if (GPIO_Pin == BUTTON7_Pin) { // headlights
 		currentTime = HAL_GetTick();
